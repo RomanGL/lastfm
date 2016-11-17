@@ -28,6 +28,8 @@ namespace IF.Lastfm.Core.Objects
         public Uri Url { get; set; }
 
         public LastImageSet Images { get; set; }
+
+        public LastWiki Wiki { get; set; }
         
         internal static LastAlbum ParseJToken(JToken token)
         {
@@ -101,6 +103,12 @@ namespace IF.Lastfm.Core.Objects
             if (DateTimeOffset.TryParse(dateString, out releaseDate))
             {
                 a.ReleaseDateUtc = releaseDate;
+            }
+
+            var wikiToken = token["wiki"];
+            if (wikiToken != null)
+            {
+                a.Wiki = LastWiki.ParseJToken(wikiToken);
             }
 
             return a;

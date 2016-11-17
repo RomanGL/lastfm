@@ -20,6 +20,8 @@ namespace IF.Lastfm.Core.Api.Commands.Album
 
         public bool Autocorrect { get; set; }
 
+        public string Lang { get; set; }
+
         public GetInfoCommand(ILastAuth auth) : base(auth) { }
 
         public GetInfoCommand(ILastAuth auth, string album, string artist)
@@ -39,6 +41,11 @@ namespace IF.Lastfm.Core.Api.Commands.Album
             {
                 Parameters.Add("artist", ArtistName);
                 Parameters.Add("album", AlbumName);
+            }
+
+            if (Lang != null)
+            {
+                Parameters.Add("lang", Lang);
             }
 
             Parameters.Add("autocorrect", Convert.ToInt32(Autocorrect).ToString());

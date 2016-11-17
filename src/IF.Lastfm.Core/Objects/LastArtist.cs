@@ -51,6 +51,7 @@ namespace IF.Lastfm.Core.Objects
         public List<LastArtist> Similar { get; set; }
         public LastImageSet MainImage { get; set; }
         public int PlayCount { get; set; }
+        public double MatchSimilar { get; set; }
         public LastStats Stats { get; set; }
 
         #endregion
@@ -75,6 +76,13 @@ namespace IF.Lastfm.Core.Objects
             if (int.TryParse(playCountStr, out playCount))
             {
                 a.PlayCount = playCount;
+            }
+
+            var matchStr = token.Value<string>("match");
+            double match;
+            if (double.TryParse(matchStr, out match))
+            {
+                a.MatchSimilar = match;
             }
 
             // for some stupid reason the api returns the url without http in the get similar method, WHY?
