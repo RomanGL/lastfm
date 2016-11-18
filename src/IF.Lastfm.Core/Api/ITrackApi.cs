@@ -22,7 +22,7 @@ namespace IF.Lastfm.Core.Api
             int page = 0,
             int count = LastFm.DefaultPageLength);
 
-        Task<LastResponse<LastTrack>> GetInfoAsync(string trackname, string artistname, string username = "");
+        Task<LastResponse<LastTrack>> GetInfoAsync(string trackname, string artistname, string username = "", bool autocorrect = false);
         Task<LastResponse<LastTrack>> GetInfoByMbidAsync(string mbid);
         Task<PageResponse<LastTrack>> GetSimilarAsync(string trackname, string artistname, bool autocorrect = false, int limit = 100);
 

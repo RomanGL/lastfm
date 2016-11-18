@@ -50,13 +50,14 @@ namespace IF.Lastfm.Core.Api
             return await command.ExecuteAsync();
         }
 
-        public async Task<LastResponse<LastTrack>> GetInfoAsync(string trackname, string artistname, string username = "")
+        public async Task<LastResponse<LastTrack>> GetInfoAsync(string trackname, string artistname, string username = "", bool autocorrect = false)
         {
             var command = new GetInfoCommand(Auth)
             {
                 TrackName = trackname,
                 ArtistName = artistname,
                 Username = username,
+                Autocorrect = autocorrect,
                 HttpClient = HttpClient
             };
 

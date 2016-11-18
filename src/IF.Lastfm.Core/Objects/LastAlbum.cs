@@ -122,5 +122,16 @@ namespace IF.Lastfm.Core.Objects
             
             return name;
         }
+
+        internal static LastImageSet GetImagesFromJToken(JToken albumToken)
+        {
+            var images = albumToken.SelectToken("image");
+            if (images != null)
+            {
+                return LastImageSet.ParseJToken(images);
+            }
+
+            return null;
+        }
     }
 }

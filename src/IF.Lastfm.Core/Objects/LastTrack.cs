@@ -80,12 +80,6 @@ namespace IF.Lastfm.Core.Objects
             else
                 t.ArtistName = artistToken.ToObject<string>();
 
-            var albumToken = token.SelectToken("album");
-            if (albumToken != null)
-            {
-                t.AlbumName = LastAlbum.GetNameFromJToken(albumToken);
-            }
-
             var tagsToken = token.SelectToken("toptags");
             if (tagsToken != null)
             {
@@ -111,6 +105,17 @@ namespace IF.Lastfm.Core.Objects
             {
                 var imageCollection = LastImageSet.ParseJToken(images);
                 t.Images = imageCollection;
+            }
+
+            var albumToken = token.SelectToken("album");
+            if (albumToken != null)
+            {
+                t.AlbumName = LastAlbum.GetNameFromJToken(albumToken);
+
+                if (t.Images == null)
+                {
+                    t.Images = LastAlbum.GetImagesFromJToken(albumToken);
+                }
             }
 
             var lovedToken = token.SelectToken("userloved");
